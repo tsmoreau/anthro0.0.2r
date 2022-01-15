@@ -30,7 +30,7 @@ export default function Home() {
     <div>
       <Head>
         <title>Anthromancer - Home</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
 
       <main className="bg-black ">

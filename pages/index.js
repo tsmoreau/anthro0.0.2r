@@ -31,13 +31,28 @@ export default function Home() {
     <div className="bg-black h-full ">
       <Head>
         <title>Anthromancer - Home</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
 
       <div className="">
         <Nav />
+
         <div className="bg-th-background w-full py-2 lg:py-8  text-center justify-center">
-          <div className="border mx-4 lg:mx-12 rounded-lg  bg-slate-200 h-136">
+          <div className="overflow-hidden items-center border mx-4 lg:mx-20 rounded-lg  bg-slate-200 h-136">
+            <img
+              src="/ProductShot.jpg"
+              className="object-cover w-full h-136 object-center rounded-lg  "
+            />
+          </div>
+        </div>
+
+        <div className=" bg-th-background w-full py-2 lg:py-8  text-right justify-end align-bottom">
+          <div className="relative border mx-4 lg:mx-20 rounded-lg  bg-slate-200 h-136">
+            <p className="absolute bottom-5 right-10">TS</p>
+          </div>
+        </div>
+        <div className="bg-th-background w-full py-2 lg:py-8  text-center justify-center">
+          <div className="border mx-4 lg:mx-20 rounded-lg  bg-slate-200 h-136">
             TS
           </div>
         </div>

@@ -1,5 +1,17 @@
 import { connectToDatabase } from "../util/mongodb";
 
+export async function getServerSideProps() {
+  const { db } = await connectToDatabase();
+
+  const users = await db.collection("users").find({}).limit(20).toArray();
+  console.log(users);
+  return {
+    props: {
+      users: JSON.parse(JSON.stringify(users))
+    }
+  };
+}
+
 export default function Posts({ users }) {
   console.log(users);
   return (
@@ -18,16 +30,4 @@ export default function Posts({ users }) {
       </ul>
     </div>
   );
-}
-
-export async function getServerSideProps() {
-  const { db } = await connectToDatabase();
-
-  const users = await db.collection("users").find({}).limit(20).toArray();
-  console.log(users);
-  return {
-    props: {
-      users: JSON.parse(JSON.stringify(users))
-    }
-  };
 }

@@ -17,7 +17,7 @@ export default function Home() {
     <div>
       <Head>
         <title>Anthromancer - Hymns</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
 
       <main className="fill-black">

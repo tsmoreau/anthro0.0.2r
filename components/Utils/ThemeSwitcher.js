@@ -13,19 +13,28 @@ const ThemeChanger = () => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme("dark");
 
-  const [isOn, setIsOn] = useState(false);
-
   // When mounted on client, now we can show the UI
   useEffect(() => setMounted(true), []);
 
+  useEffect(() => {
+    updateThemeToLocal();
+  }, []);
+
+  function updateThemeToLocal() {
+    console.log("Theme");
+    console.log(theme);
+    if (theme === "dark") {
+      setIsOn(true);
+    } else if (theme === "light") {
+      setIsOn(false);
+    }
+  }
+
+  const [isOn, setIsOn] = useState(mounted);
+
   if (!mounted) return null;
 
-  function DarkModeToggle({
-    colour = "bg-blue-600",
-    on = false,
-    onToggle = () => {},
-    tabIndex = 0
-  }) {
+  function DarkModeToggle() {
     function toggle() {
       console.log("Test ");
       console.log(theme);
@@ -33,10 +42,10 @@ const ThemeChanger = () => {
 
       if (isOn === true) {
         setIsOn(false);
-        setTheme("dark");
+        setTheme("light");
       } else if (isOn === false) {
         setIsOn(true);
-        setTheme("light");
+        setTheme("dark");
       }
     }
 
