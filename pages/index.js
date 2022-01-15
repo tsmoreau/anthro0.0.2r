@@ -36,7 +36,12 @@ export default function Home() {
 
       <div className="">
         <Nav />
-        <div className="text-center items-center justify-center flex mx-auto text-primary-dark text-4xl h-screen flex mx-auto bg-th-background">
+        <div className="bg-th-background w-full py-2 lg:py-8  text-center justify-center">
+          <div className="border mx-4 lg:mx-12 rounded-lg  bg-slate-200 h-136">
+            TS
+          </div>
+        </div>
+        <div className="text-center items-center justify-center flex mx-auto text-primary-dark text-4xl  flex mx-auto bg-th-background">
           Some Text
         </div>
 
@@ -48,17 +53,6 @@ export default function Home() {
         }
 
         main {
-        }
-
-        @font-face {
-          font-family: myFirstFont123;
-          src: url(/fonts/BlankRiver.ttf);
-        }
-
-        #anth01,
-        #anth02 {
-          font-family: myFirstFont123;
-          text-shadow: 1px 1px white;
         }
       `}</style>
 

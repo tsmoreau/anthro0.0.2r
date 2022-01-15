@@ -14,6 +14,18 @@ export default function NextWeb3App({ Component, pageProps }) {
     <ThemeProvider>
       <Web3ReactProvider getLibrary={getLibrary}>
         <Component {...pageProps} />
+        <style jsx>{`
+           {
+          
+          @font-face {
+            font-family: Futura;
+            src: url(/fonts/futura-pt-book.otf);
+          }
+          @font-face {
+            font-family: Anthro;
+            src: url(/fonts/AnthromancerRegular2.otf);
+          }
+        `}</style>
       </Web3ReactProvider>
     </ThemeProvider>
   );

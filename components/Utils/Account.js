@@ -53,7 +53,7 @@ const Account = ({ triedToEagerConnect }) => {
       <div>
         {hasMetaMaskOrWeb3Available ? (
           <button
-            className="font-futura text-2xl text-white px-6 py-1  border bg-th-accent-light border-th-primary-dark "
+            className="mr-1 font-futura font-thin text-xl text-white px-5 py-0.5  border bg-th-accent-light border-th-primary-dark "
             onClick={() => {
               setConnecting(true);
 
@@ -84,7 +84,7 @@ const Account = ({ triedToEagerConnect }) => {
   }
 
   return (
-    <button className="font-futura text-2xl text-th-primary-dark ">
+    <button className="font-thin font-futura text-2xl text-th-primary-dark ">
       {ENSName || `${shortenHex(account, 4)}`}
     </button>
   );

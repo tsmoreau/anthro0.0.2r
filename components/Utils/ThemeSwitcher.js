@@ -11,7 +11,7 @@ const themes = [
 
 const ThemeChanger = () => {
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme } = useTheme("dark");
 
   const [isOn, setIsOn] = useState(false);
 
@@ -27,17 +27,16 @@ const ThemeChanger = () => {
     tabIndex = 0
   }) {
     function toggle() {
+      console.log("Test ");
       console.log(theme);
       console.log(isOn);
-      if (theme === "dark") {
-        setTheme("light");
-      } else if (theme === "light") {
-        setTheme("dark");
-      }
+
       if (isOn === true) {
         setIsOn(false);
+        setTheme("dark");
       } else if (isOn === false) {
         setIsOn(true);
+        setTheme("light");
       }
     }
 

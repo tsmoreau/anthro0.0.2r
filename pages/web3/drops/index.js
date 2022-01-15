@@ -111,35 +111,17 @@ export default function Home() {
 
       <Footer />
       <style jsx>{`
-        nav {
-          display: flex;
-          justify-content: space-between;
-        }
-
-        main {
-          text-align: center;
+        #title {
+          font-family: Futura;
         }
 
         @font-face {
-          font-family: myFirstFont123;
-          src: url(/fonts/BlankRiver.ttf);
+          font-family: Futura;
+          src: url(/fonts/futura-pt-book.otf);
         }
-
-        #depict,
-        #depict3 {
-          font-family: myFirstFont123;
-          text-shadow: 1px 1px white;
-        }
-
-        /* Hide scrollbar for Chrome, Safari and Opera */
-        #scroller::-webkit-scrollbar {
-          display: none;
-        }
-
-        /* Hide scrollbar for IE, Edge and Firefox */
-        #scroller {
-          -ms-overflow-style: none; /* IE and Edge */
-          scrollbar-width: none; /* Firefox */
+        @font-face {
+          font-family: Anthro;
+          src: url(/fonts/AnthromancerRegular2.otf);
         }
       `}</style>
       <style jsx global>{`

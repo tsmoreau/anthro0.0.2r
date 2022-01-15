@@ -11,7 +11,7 @@ function CodexDropdown() {
   return (
     <div className=" text-xl mx-2 text-base text-th-primary-dark">
       <Popover className="relative">
-        <Popover.Button className=" text-xl flex items-center text-th-primary-dark transition ease-in-out hover:-translate-y-0.5">
+        <Popover.Button className=" text-xl font-thin flex items-center text-th-primary-dark transition ease-in-out hover:-translate-y-0.5">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="8"
@@ -231,9 +231,11 @@ export default function IndexPage() {
                   <div className="mt-6 flex w-full items-center justify-between">
                     <div className="flex items-center justify-between w-full">
                       <div className="flex items-center">
-                        <div className="-mb-2 w-48">
-                          <Logo />
-                        </div>
+                        <a href="/">
+                          <div className="-mb-2 w-48">
+                            <Logo />
+                          </div>
+                        </a>
                       </div>
                       <div
                         id="cross"
@@ -313,9 +315,11 @@ export default function IndexPage() {
             <div className="h-px -mt-0.5"></div>
           ) : (
             <div className="font-molle text-2xl py-0.5 pt-0.5 bg-th-background px-6 w-full flex lg:hidden justify-between items-center  top-0 z-40">
-              <div className="-mb-2 w-96">
-                <Logo />
-              </div>
+              <a href="/">
+                <div className="-mb-2.5 w-80">
+                  <Logo />
+                </div>
+              </a>
               <div className="flex items-center">
                 <div className="relative mr-6 "></div>
                 <div
