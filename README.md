@@ -12,10 +12,6 @@ Just added a TypeScript version of this boilerplate and upgrade the dependencies
 - Hooks-first approach to fetching and caching data from Contracts and memoization for performance with SWR
 - web3-react for ease of connecting to Web3 providers with a solid API
 
-## Previous Art
-
-- [NoahZinsmeister/hypertext](https://github.com/NoahZinsmeister/hypertext)
-
 ## Getting Started
 
 First, run the development server:
