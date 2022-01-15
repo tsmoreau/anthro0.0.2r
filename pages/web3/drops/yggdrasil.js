@@ -40,21 +40,23 @@ export default function Home() {
     <div>
       <Head>
         <title>Anthromancer - Yggdrasil</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <Nav />
-      <div className=" bg-black text-white">
+      <div className=" bg-th-background text-th-primary-dark">
         <div className="w-screen flex">
           <div
             id="scroller"
-            className="snap-y snap-mandatory w-full lg:w-8/12 h-screen lg:h-156 overflow-scroll"
+            className="snap-y w-full lg:w-8/12 h-screen lg:h-156 overflow-scroll"
           >
-            <div className="lg:hidden flex snap-center  bg-black w-full h-screen lg:h-156  flex-col text-center items-center justify-center text-base px-3 ">
-              <div className="w-8/12 flex mx-auto rounded-lg -translate-y-8">
+            <div className="lg:hidden -translate-y-4 flex snap-center  bg-th-background w-full  h-screen lg:h-156  flex-col text-center items-center justify-center text-base px-3 ">
+              <div className="w-8/12 flex mx-auto rounded-lg -translate-y-6">
                 <img id="NFT" src="/yggdrasil.png" />
               </div>
-              <p className="text-3xl font-bold -translate-y-3">∞. Yggdrasil</p>
-              <p className="font-sans px-2 pt-3 text-sm -translate-y-3">
+              <p className="underline underline-offset-2 decoration-th-accent-light font-futura text-3xl font-bold -translate-y-5">
+                ∞. Yggdrasil
+              </p>
+              <p className="font-futura px-2 pt-3 text-sm -translate-y-5">
                 <p>
                   In Norse mythology, Yggdrasil is the massive tree whose roots
                   and branches stretch through the nine realms of time and
@@ -77,9 +79,9 @@ export default function Home() {
                 </p>
               </p>
             </div>
-            <div className=" snap-center  bg-black w-full h-screen lg:h-156 flex flex-col text-center items-center justify-center text-base px-3 lg:px-36">
+            <div className="font-futura snap-center  bg-th-background w-full h-screen lg:h-156 flex flex-col text-center items-center justify-center text-base px-3 lg:px-36">
               <div className="-mt-16 w-full ">
-                <p className="text-3xl leading-tight lg:leading-relaxed font-bold text-left underline underline-offset-2 decoration-yggpurple-300">
+                <p className="text-3xl leading-tight lg:leading-relaxed font-semibold text-left underline underline-offset-2 decoration-th-accent-light">
                   The Beginning
                 </p>
 
@@ -122,14 +124,15 @@ export default function Home() {
                   className="flex mx-auto mt-4  "
                   stroke="#67e8f9"
                   strokeWidth="3px"
+                  fill="none"
                 >
                   <path d="M12 21l-12-18h24z" />
                 </svg>
               </div>
             </div>
-            <div className="snap-center bg-black w-full  h-screen lg:h-156 flex flex-col text-center items-center justify-center text-base px-3 lg:px-36">
+            <div className="snap-center bg-th-background w-full  h-screen lg:h-156 flex flex-col text-center items-center justify-center text-base px-3 lg:px-36">
               <div className="-mt-24 w-full">
-                <p className=" text-3xl font-bold text-left underline underline-offset-2 decoration-yggpurple-300">
+                <p className=" text-3xl font-bold text-left underline underline-offset-2 decoration-th-accent-light">
                   How to Get Started
                 </p>
 
@@ -148,14 +151,15 @@ export default function Home() {
                   className="flex mx-auto mt-4  "
                   stroke="#67e8f9"
                   strokeWidth="3px"
+                  fill="none"
                 >
                   <path d="M12 21l-12-18h24z" />
                 </svg>
               </div>
             </div>
-            <div className=" snap-center bg-black w-full h-screen lg:h-156 flex flex-col text-center items-center justify-center text-base px-3 lg:px-36">
+            <div className=" snap-center bg-th-background w-full h-screen lg:h-156 flex flex-col text-center items-center justify-center text-base px-3 lg:px-36">
               <div className="-mt-12 w-full leading-tight lg:leading-relaxed">
-                <p className="text-3xl font-bold text-left underline underline-offset-2 decoration-yggpurple-300">
+                <p className="text-3xl font-bold text-left underline underline-offset-2 decoration-th-accent-light">
                   The Steps
                 </p>
 
@@ -207,14 +211,15 @@ export default function Home() {
                   className="flex mx-auto mt-4  "
                   stroke="#67e8f9"
                   strokeWidth="3px"
+                  fill="none"
                 >
                   <path d="M12 21l-12-18h24z" />
                 </svg>
               </div>
             </div>
-            <div className=" snap-center bg-black w-full h-screen lg:h-156 flex flex-col text-center items-center justify-center text-base px-3 lg:px-36">
+            <div className=" snap-center bg-th-background w-full h-screen lg:h-156 flex flex-col text-center items-center justify-center text-base px-3 lg:px-36">
               <div className="-mt-12 w-full flex flex-col mx-auto text-center justify-center">
-                <p className="text-3xl font-bold text-left underline underline-offset-2 decoration-yggpurple-300">
+                <p className="text-3xl font-bold text-left underline underline-offset-2 decoration-th-accent-light">
                   The Claim Button
                 </p>
                 <p className="flex mx-auto text-center justify-center py-4">
@@ -236,14 +241,15 @@ export default function Home() {
                   className="flex mx-auto mt-4  "
                   stroke="#67e8f9"
                   strokeWidth="3px"
+                  fill="none"
                 >
                   <path d="M12 21l-12-18h24z" />
                 </svg>
               </div>
             </div>
-            <div className=" snap-center bg-black w-full h-screen lg:h-156 flex flex-col text-center items-center justify-center text-base px-3 lg:px-36">
+            <div className=" snap-center bg-th-background w-full h-screen lg:h-156 flex flex-col text-center items-center justify-center text-base px-3 lg:px-36">
               <div className="-mt-12 w-full ">
-                <p className="text-3xl font-bold text-left underline underline-offset-2 decoration-yggpurple-300">
+                <p className="text-3xl font-bold text-left underline underline-offset-2 decoration-th-accent-light">
                   Congratulations! Now What?
                 </p>
 
@@ -287,14 +293,15 @@ export default function Home() {
                   className="flex mx-auto mt-4  "
                   stroke="#67e8f9"
                   strokeWidth="3px"
+                  fill="none"
                 >
                   <path d="M12 21l-12-18h24z" />
                 </svg>
               </div>
             </div>
-            <div className="snap-center bg-black w-full h-screen lg:h-156 flex flex-col text-center items-center justify-center text-base px-3 lg:px-36">
+            <div className="snap-center bg-th-background w-full h-screen lg:h-156 flex flex-col text-center items-center justify-center text-base px-3 lg:px-36">
               <div className="-mt-8 w-full ">
-                <p className="text-3xl font-bold text-left underline underline-offset-2 decoration-yggpurple-300">
+                <p className="text-3xl font-bold text-left underline underline-offset-2 decoration-th-accent-light">
                   What's Next for Anthromancer?
                 </p>
 
@@ -327,6 +334,7 @@ export default function Home() {
                   className="flex mx-auto mt-4  "
                   stroke="#67e8f9"
                   strokeWidth="3px"
+                  fill="none"
                 >
                   <path d="M12 21l-12-18h24z" />
                 </svg>
@@ -338,7 +346,7 @@ export default function Home() {
               <img id="NFT" src="/yggdrasil.png" />
             </div>
             <p className="text-3xl font-bold">∞. Yggdrasil</p>
-            <p className="font-sans px-12 pt-3 text-sm">
+            <p className="font-futura px-12 pt-3 text-sm">
               <p>
                 In Norse mythology, Yggdrasil is the massive tree whose roots
                 and branches stretch through the nine realms of time and space.
@@ -360,6 +368,7 @@ export default function Home() {
             </p>
           </div>
         </div>
+        <Footer />
       </div>
 
       <style jsx>{`

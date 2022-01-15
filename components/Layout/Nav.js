@@ -114,7 +114,7 @@ function TokensDropdown() {
               className="w-full py-4 hover:bg-th-primary-light "
               href="/web3/drops/yggdrasil"
             >
-              Yygdrasil
+              Yggdrasil
             </a>
             <a
               className="w-full py-4 hover:bg-th-primary-light "
