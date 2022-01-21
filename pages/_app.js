@@ -16,6 +16,8 @@ export default function NextWeb3App({ Component, pageProps }) {
         <Component {...pageProps} />
         <style jsx>{`
            {
+
+
           
           @font-face {
             font-family: Futura;
@@ -24,6 +26,11 @@ export default function NextWeb3App({ Component, pageProps }) {
           @font-face {
             font-family: Anthro;
             src: url(/fonts/AnthromancerRegular2.otf);
+          
+
+            @import url("https://use.typekit.net/pcf5uvh.css");
+      
+            
           }
         `}</style>
       </Web3ReactProvider>

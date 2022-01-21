@@ -16,50 +16,38 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Anthromancer - Anthropos</title>
+        <title>Anthromancer - Shop</title>
         <link rel="icon" href="/favicon.png" />
       </Head>
 
-      <main className="bg-black text-white">
+      <main className="bg-th-background">
         <Nav />
 
-        <div className="py-4">
-          <a href="/" className="font-mono text-3xl pt-12">
-            web3
-          </a>
-        </div>
-        <div className="py-4">
-          <a href="/web3/drops" className="font-mono text-base">
-            Drops
-          </a>
-        </div>
-        <div className="py-4">
-          <a href="/web3/resources" className="font-mono text-base">
-            Resources
-          </a>
+        <div
+          id="shop"
+          className="bg-th-background w-full mt-2 lg:mt-36  text-center justify-center"
+        >
+          <div className="py-8">
+            <p className="text-th-primary-dark decoration-th-accent-light underline font-anthro font-medium text-6xl tracking-tighter pt-4 lg:pt-12">
+              SHOP
+            </p>
+          </div>
         </div>
       </main>
       <Footer />
 
       <style jsx>{`
-        nav {
-          display: flex;
-          justify-content: space-between;
-        }
-
-        main {
-          text-align: center;
+        #title {
+          font-family: Futura;
         }
 
         @font-face {
-          font-family: myFirstFont123;
-          src: url(/fonts/BlankRiver.ttf);
+          font-family: Futura;
+          src: url(/fonts/futura-pt-book.otf);
         }
-
-        #depict,
-        #depict3 {
-          font-family: myFirstFont123;
-          text-shadow: 1px 1px white;
+        @font-face {
+          font-family: Anthro;
+          src: url(/fonts/AnthromancerRegular2.otf);
         }
       `}</style>
 

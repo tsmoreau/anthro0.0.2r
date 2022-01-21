@@ -2,23 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap");
+
 @layer base {
   @font-face {
     font-family: Anthro;
     font-weight: 400;
     src: url(/fonts/AnthromancerRegular2.otf) format("otf");
-  }
-  @font-face {
-    font-family: Futura;
-    font-weight: 900;
-    src: url(/fonts/futura-pt-book.otf) format("otf");
-  }
-  @font-face {
-    font-family: futura-pt-heavy, sans-serif;
-
-    font-weight: 700;
-
-    font-style: normal;
   }
 }
 
@@ -27,11 +17,11 @@
   --background-secondary: theme("colors.gray.800");
 
   --accent-dark: theme("colors.yggpurple.300");
-  --accent-medium: theme("colors.yggpurple.300");
+  --accent-medium: theme("colors.yggpurple.500");
   --accent-light: theme("colors.yggpurple.300");
 
   --primary-dark: theme("colors.white");
-  --primary-medium: theme("colors.yggpurple.300");
+  --primary-medium: theme("colors.yggpurple.500");
   --primary-light: theme("colors.yggpurple.300");
 }
 
@@ -44,7 +34,7 @@
   --accent-light: theme("colors.sky.500");
 
   --primary-dark: theme("colors.slate.700");
-  --primary-medium: theme("colors.sky.200");
+  --primary-medium: theme("colors.sky.300");
   --primary-light: theme("colors.sky.100");
 }
 

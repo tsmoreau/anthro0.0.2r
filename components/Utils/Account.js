@@ -53,7 +53,7 @@ const Account = ({ triedToEagerConnect }) => {
       <div>
         {hasMetaMaskOrWeb3Available ? (
           <button
-            className="mr-1 font-futura font-thin text-xl text-white px-5 py-0.5  border bg-th-accent-light border-th-primary-dark "
+            className="font-futura text-xl text-white px-5 py-0.5 pt-0.5 font-light border-2 bg-th-primary-medium border-th-accent-light hover:bg-th-primary-medium"
             onClick={() => {
               setConnecting(true);
 
@@ -68,8 +68,8 @@ const Account = ({ triedToEagerConnect }) => {
             }}
           >
             {MetaMaskOnboarding.isMetaMaskInstalled()
-              ? "Connect Wallet"
-              : "Connect Wallet"}
+              ? "CONNECT WALLET"
+              : "CONNECT WALLET"}
           </button>
         ) : (
           <button
@@ -84,9 +84,21 @@ const Account = ({ triedToEagerConnect }) => {
   }
 
   return (
-    <button className="font-thin font-futura text-2xl text-th-primary-dark ">
-      {ENSName || `${shortenHex(account, 4)}`}
-    </button>
+    <div className="font-thin flex tracking-wide  font-futura text-xl text-white px-5 py-0.5 pt-0.5 border-2 bg-th-accent-light border-th-accent-light hover:bg-th-primary-medium">
+      {ENSName || `${shortenHex(account, 4)}`} |{" "}
+      <svg
+        width="12"
+        height="12"
+        xmlns="http://www.w3.org/2000/svg"
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        viewBox="0 0 24 24"
+        className="-mr-2 ml-1 text-th-primary-dark mt-2"
+        stroke="white"
+      >
+        <path d="M23.245 4l-11.245 14.374-11.219-14.374-.781.619 12 15.381 12-15.391-.755-.609z" />
+      </svg>
+    </div>
   );
 };
 
