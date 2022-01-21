@@ -32,6 +32,14 @@ export default function Home() {
               SHOP
             </p>
           </div>
+          <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-4 gap-x-2">
+            <div className="max-w-sm w-full h-136 bg-lime-300">TEST!</div>
+            <div className="max-w-sm w-full h-136 bg-lime-300">TEST!</div>
+            <div className="max-w-sm w-full h-136 bg-lime-300">TEST!</div>
+            <div className="max-w-sm w-full h-136 bg-lime-300">TEST!</div>
+            <div className="max-w-sm w-full h-136 bg-lime-300">TEST!</div>
+            <div className="max-w-sm w-full h-136 bg-lime-300">TEST!</div>
+          </div>
         </div>
       </main>
       <Footer />
