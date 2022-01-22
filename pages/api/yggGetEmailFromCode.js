@@ -48,13 +48,11 @@ async function getCodes(req, res) {
 
 // Getting one posts.
 async function getOneCode(req, res) {
+  const { code1 } = req.body.code;
+  console.log(code1);
   try {
     let { db } = await connectToDatabase();
-    let posts = await db
-      .collection("yggcodes")
-      .find({ email: "test" })
-      .sort({ redeemed: -1 })
-      .toArray();
+    let posts = await db.collection("yggcodes").find().toArray();
     return res.json({
       message: JSON.parse(JSON.stringify(posts)),
       success: true
@@ -71,9 +69,14 @@ async function getOneCode(req, res) {
 async function addCode(req, res) {
   try {
     let { db } = await connectToDatabase();
-    await db.collection("yggcodes").insertOne(JSON.parse(req.body));
+    let posts = await db
+      .collection("yggcodes")
+      .find({ code: JSON.parse(req.body) })
+      .toArray();
+    console.log(posts);
+
     return res.json({
-      message: "Code Added Successfully",
+      message: JSON.parse(JSON.stringify(posts)),
       success: true
     });
   } catch (error) {

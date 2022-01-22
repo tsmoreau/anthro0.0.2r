@@ -7,6 +7,7 @@ import Alert from "../../../components/Layout/Alert";
 
 import Footer from "../../../components/Layout/Footer";
 import useEagerConnect from "../../../hooks/useEagerConnect";
+import { Fragment, useState, useEffect } from "react";
 
 import React from "react";
 import PropTypes from "prop-types";
@@ -31,10 +32,113 @@ YoutubeEmbed.propTypes = {
 
 export default function Home() {
   const { account, library } = useWeb3React();
+  const [content, setContentFromDb] = useState([]);
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+
+  const [formInput, updateFormInput] = useState({
+    code: ""
+  });
 
   const triedToEagerConnect = useEagerConnect();
 
   const isConnected = typeof account === "string" && !!library;
+
+  async function callRelayer() {
+    if (!formInput.code) {
+      console.log("error");
+    } else {
+      console.log("Wallet Address");
+      console.log(account);
+      console.log("Code");
+      console.log(formInput.code);
+      let response = await fetch("api/yggDefenderConnect", {
+        method: "POST",
+        body: JSON.stringify({ account, formInput }),
+        headers: { "Content-Type": "application/json" }
+      });
+      console.log(response);
+    }
+  }
+
+  const getOnePost2 = async () => {
+    console.log("Getting your data!");
+    console.log(formInput.code);
+
+    // reset error and message
+    setError("");
+    setMessage("");
+
+    // get the posts
+    let response = await fetch("/api/yggGetEmailFromCode", {
+      method: "POST",
+      body: JSON.stringify(formInput.code)
+    });
+
+    // get the data
+    let data = await response.json();
+
+    if (data.success) {
+      // reset the fields and log the data
+      console.log(data.message);
+      setContentFromDb(data.message);
+    } else {
+      // set the error
+      return setError(data.message);
+    }
+  };
+
+  const getOnePost = async () => {
+    console.log("Getting your data!");
+    console.log("a68004ae-8d0c-4f7c-9c53-7bbf263bfa15");
+
+    // reset error and message
+    setError("");
+    setMessage("");
+
+    // get the posts
+    let response = await fetch("/api/yggGetEmailFromCode", {
+      method: "POST",
+      body: JSON.stringify("a68004ae-8d0c-4f7c-9c53-7bbf263bfa15")
+    });
+
+    // get the data
+    let data = await response.json();
+
+    if (data.success) {
+      // reset the fields and log the data
+      console.log(data.message);
+      setContentFromDb(data.message);
+    } else {
+      // set the error
+      return setError(data.message);
+    }
+  };
+
+  const getOnePost3 = async () => {
+    console.log("Getting your data!");
+
+    // reset error and message
+    setError("");
+    setMessage("");
+
+    // get the posts
+    let response = await fetch("/api/yggGetEmailFromCode", {
+      method: "GET"
+    });
+
+    // get the data
+    let data = await response.json();
+
+    if (data.success) {
+      // reset the fields and log the data
+      console.log(data.message);
+      setContentFromDb(data.message);
+    } else {
+      // set the error
+      return setError(data.message);
+    }
+  };
 
   return (
     <div>
@@ -345,26 +449,55 @@ export default function Home() {
             <div className="w-8/12 flex mx-auto rounded-lg mt-4">
               <img id="NFT" src="/yggdrasil.png" />
             </div>
-            <p className="text-3xl font-bold">∞. Yggdrasil</p>
-            <p className="font-futura px-12 pt-3 text-sm">
-              <p>
-                In Norse mythology, Yggdrasil is the massive tree whose roots
-                and branches stretch through the nine realms of time and space.
-                The concept of a great tree on whose body rests the world,
-                though, transcends any culture, and the four-dimensional
-                structure of spacetime evokes a similar metaphor.
-              </p>
+            <p className="hidden text-3xl font-bold">∞. Yggdrasil</p>
 
-              <p className="mt-4">
-                We are the fruit of the tree of time, and as we are born we
-                become its stewards. In this token we see the image of a tree
-                appearing in front of metatron’s cube, a sacred geometric design
-                which contains schematic information for all of the platonic
-                solids, those mathematically perfect shapes that were once
-                theorized to be the building blocks of reality. Yggdrasil is the
-                icon of cosmic unity; the blend between the divine feminine
-                chaos of nature, and the divine masculine order of math.
-              </p>
+            <p className="font-futura px-12 pt-1 text-sm justify-center text-center flex flex-col items-center">
+              {!account ? (
+                <div>
+                  <p className="font-futura px-12 pt-1 text-xl justify-center text-center flex flex-col items-center">
+                    To Claim:
+                  </p>
+                  <a href="https://www.one37pm.com/nft/tech/how-to-set-up-metamask-wallet">
+                    <div className="w-72 mb-2 font-futura text-xl text-white px-5 py-0.5 pt-0.5 font-light border-2 bg-th-primary-medium border-th-accent-light hover:bg-th-primary-medium">
+                      1) Setup Your Metamask Wallet
+                    </div>
+                  </a>
+                </div>
+              ) : (
+                <div className="text-center text-base w-full">
+                  Your Wallet Address: <br />
+                  {account}
+                  <p className="font-futura w-full pt-1 text-sm justify-center text-center flex flex-col items-center">
+                    (This is the address where your Yggdrasil Token will be
+                    sent.)
+                  </p>
+                </div>
+              )}
+
+              {!account ? (
+                <div className="w-72 font-futura text-xl text-white px-5 py-0.5 pt-0.5 font-light border-2 bg-th-primary-medium border-th-accent-light hover:bg-th-primary-medium">
+                  2) Connect Your Wallet Above
+                </div>
+              ) : (
+                <div>
+                  <div className="w-full font-futura text-white text-xl flex flex-col items-center justify-center mx-auto  w-3/4">
+                    <input
+                      placeholder="Claim Code From Email"
+                      className="w-full my-2 p-2 border rounded-lg text-th-primary-dark bg-th-background"
+                      onChange={(e) =>
+                        updateFormInput({ ...formInput, code: e.target.value })
+                      }
+                    />
+                    <div
+                      onClick={getOnePost}
+                      className="w-72 font-futura text-xl text-white px-5 py-0.5 pt-0.5 font-light border-2 bg-th-primary-medium border-th-accent-light hover:bg-th-primary-medium"
+                    >
+                      Redeem Code
+                    </div>
+                  </div>
+                  {content}
+                </div>
+              )}
             </p>
           </div>
         </div>
