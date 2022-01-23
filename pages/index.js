@@ -98,7 +98,7 @@ export default function Home() {
       </div>
 
       <div className="h-24 w-full bg-lime-300 invisible">Spacer</div>
-      <YggClaim />
+
       <ScrollAnimation
         animateIn="fadeInLeft"
         animateOut="fadeOut"

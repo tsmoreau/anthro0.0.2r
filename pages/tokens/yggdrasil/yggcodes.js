@@ -121,7 +121,7 @@ function YggClaim() {
 
   return (
     <div>
-      <div className="border flex flex-col items-center justify-center  mx-auto text-center">
+      <div className="flex flex-col items-center justify-center  mx-auto text-center">
         <div className="text-center  px-5 py-2   mx-5">
           <form>
             {error ? (
@@ -153,7 +153,7 @@ function YggClaim() {
         </div>
       </div>
       {/* // DIVIDER BETWEEN COMPONENTS // */}
-      <div className="border font-futura w-full flex flex-row flex-1 mx-auto justify-center text-center">
+      <div className="font-futura w-full flex flex-row flex-1 mx-auto justify-center text-center">
         <div className="text-center  px-5 py-2  rounded-lg mx-5">
           <div className="w-full">
             {content
@@ -172,7 +172,7 @@ function YggClaim() {
                                 Final Redemption:
                               </p>
 
-                              <p className="w-full text-center mb-2">
+                              <p className="w-full text-center mb-3">
                                 {ele.email}
                               </p>
                             </div>
