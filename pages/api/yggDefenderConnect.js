@@ -7,6 +7,8 @@ export default async function handler(req, res) {
   }
 
   const { account, formInput } = req.body;
+  console.log("tes");
+  console.log(req.body);
 
   let autotaskResponse = await fetch(
     `https://api.defender.openzeppelin.com/autotasks/${process.env.AUTOTASK_SECRET_WEBHOOK}`,

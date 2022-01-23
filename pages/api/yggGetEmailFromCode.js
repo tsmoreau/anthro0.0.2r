@@ -99,8 +99,14 @@ async function redeemCode(req, res) {
       { $set: { redeemed: true } }
     );
 
+    let posts = await db
+      .collection("yggcodes")
+      .find({ _id: req.body })
+      .toArray();
+    console.log("posts");
+
     return res.json({
-      message: "Code redeemed successfully",
+      message: req.body,
       success: true
     });
   } catch (error) {

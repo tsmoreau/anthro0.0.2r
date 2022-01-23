@@ -32,7 +32,7 @@ function YggClaim() {
       console.log(formInput.email);
       console.log("Code");
       console.log(formInput.code);
-      let response = await fetch("api/yggDefenderConnect", {
+      let response = await fetch("/api/yggDefenderConnect", {
         method: "POST",
         body: JSON.stringify({ account, formInput }),
         headers: { "Content-Type": "application/json" }
