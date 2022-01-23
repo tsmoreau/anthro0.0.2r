@@ -37,7 +37,7 @@ function YggClaim() {
   const [message, setMessage] = useState("");
   const [email, setEmail] = useState(0);
   const [obj, setObj] = useState(0);
-  const [noCode, setNoCode] = useState("Code");
+  const [noCode, setNoCode] = useState(false);
   const [redeemed, setRedeemed] = useState(true);
   const { account, library } = useWeb3React();
   const [formInput, updateFormInput] = useState({
@@ -48,6 +48,7 @@ function YggClaim() {
   const getOnePost2 = async () => {
     console.log("Getting your data!");
     console.log(code);
+    setContentFromDb([]);
 
     // reset error and message
     setError("");
@@ -61,28 +62,30 @@ function YggClaim() {
 
     // get the data
     let data = await response.json();
-    if (data.status !== "success") {
-      setNoCode("No Code");
-    }else {
+    console.log(noCode);
+    console.log("status");
+    console.log(data.status);
+    if (data.message === "No Code") {
+      setNoCode(true);
+    }
 
-      console.log(data.status);
+    if (data.message !== "No Code") {
+      console.log("Status");
+      setNoCode(false);
+      console.log("Message");
+      console.log(data.message);
       console.log("Test");
       console.log(data.message[0]._id);
       console.log(data.message);
       console.log("TES2");
       console.log({ email: data.message[0].email, code: code });
-  
+
       updateFormInput({ email: data.message[0].email, code: code });
 
       setContentFromDb(data.message);
       setObj(data.message[0]._id);
       setRedeemed(data.message[0].redeemed);
       setEmail(data.message[0].email);
-  
-    }
-    if (data.success) {
-      // reset the fields and log the data
-
     } else {
       // set the error
       return setError(data.message);
@@ -166,7 +169,7 @@ function YggClaim() {
       ) : (
         <div className="flex flex-col fixed top-0 left-0 right-0 w-screen h-screen bg-black/[.6] px-1 py-0.5 text-center justify-center items-center">
           <div className="text-white text-4xl animate-[pulse_2s_ease-in-out_infinite]">
-            TX Sent, Please Wait While It Is Mined...
+            Transaction Sent, Please Wait...
           </div>
         </div>
       )}
@@ -174,17 +177,6 @@ function YggClaim() {
       <div className="flex flex-col items-center justify-center  mx-auto text-center">
         <div className="text-center  px-5 py-2   mx-5">
           <form>
-            {error ? (
-              <div>
-                <h3>{error}</h3>
-              </div>
-            ) : null}
-            {message ? (
-              <div className=" px-1 py-0.5 border rounded-lg">
-                <h3>{message}</h3>
-              </div>
-            ) : null}
-
             <div className="w-full font-futura text-white text-xl flex flex-col items-center justify-center mx-auto  w-3/4"></div>
             <input
               type="text"
@@ -201,7 +193,13 @@ function YggClaim() {
             Check Code
           </button>
         </div>
-        {noCode}
+        {noCode === false ? (
+          <div className=""></div>
+        ) : (
+          <div className="text-center w-72 font-futura text-xl text-white px-5 py-0.5 pt-0.5 font-light border-2 bg-th-primary-medium border-th-accent-light hover:bg-th-primary-medium">
+            Not A Valid Code!
+          </div>
+        )}
       </div>
 
       {/* // DIVIDER BETWEEN COMPONENTS // */}
@@ -219,7 +217,7 @@ function YggClaim() {
                         <p className="">
                           {ele.redeemed === false ? (
                             <div>
-                              <p className="w-72 text-center mb-2">
+                              <p className="w-80 text-center mb-2">
                                 (Please Ensure The Email Below Is Yours Before
                                 Final Redemption)
                               </p>
@@ -237,7 +235,7 @@ function YggClaim() {
                           <div className="flex mx-auto">
                             <div
                               onClick={callRelayer}
-                              className="cursor-pointer text-center w-72 font-futura text-xl text-white px-5 py-0.5 pt-0.5 font-light border-2 bg-th-primary-medium border-th-accent-light hover:bg-th-primary-medium"
+                              className="cursor-pointer text-center w-80 font-futura text-xl text-white px-5 py-0.5 pt-0.5 font-light border-2 bg-th-primary-medium border-th-accent-light hover:bg-th-primary-medium"
                             >
                               Redeem Code!
                             </div>
@@ -272,7 +270,7 @@ function YggClaim() {
                                     fill="white"
                                   />
                                 </svg>
-                                <p className="text-center text-base mt-2 pl-2 ml-2">
+                                <p className="text-center text-base mt-2.5 pl-2 ml-2 ">
                                   View your Item on OpenSea!
                                 </p>
                               </a>
@@ -449,6 +447,7 @@ export default function Home() {
                   height="240"
                   autoPlay
                   muted
+                  loop
                   className="rounded-lg flex mx-auto"
                 >
                   <source
@@ -668,7 +667,7 @@ export default function Home() {
                   you have to do is protect your wallet and seed phrase, and
                   keep the token safe within it.
                 </p>
-                <p className="-px-1 lg:px-6 pt-3 leading-2">
+                <p className="hidden -px-1 lg:px-6 pt-3 leading-2">
                   You are also free to sell your token on a marketplace such as
                   Opensea.io, to trade it for other tokens via a service such as
                   sudoswap, to display it in a virtual gallery such as
@@ -721,9 +720,9 @@ export default function Home() {
                   we invite you to take a look at our Road Map.
                 </p>
                 <p className="italic mt-8 ">
-                  This is Anthromancer. We are pleased to Welcome You to The
-                  Enlightenment Machine.
+                  This is Anthromancer. Welcome to The Enlightenment Machine.
                 </p>
+                <img src="/favicon.png" className="flex mx-auto w-12 mt-6" />
               </div>
               <div className="hidden bottom-0 -translate-y-16">
                 <p className=" text-xl font-bold">
@@ -746,12 +745,13 @@ export default function Home() {
             </div>
           </div>
           <div className=" hidden lg:flex flex-col lg:w-4/12 text-center mx-auto">
-            <div className="w-8/12 flex mx-auto rounded-lg mt-4">
+            <div className="w-8/12 flex mx-auto rounded-lg mt-12">
               <video
                 width="320"
                 height="240"
                 autoPlay
                 muted
+                loop
                 className="rounded-lg"
               >
                 <source

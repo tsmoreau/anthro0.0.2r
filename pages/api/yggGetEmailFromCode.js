@@ -75,10 +75,17 @@ async function addCode(req, res) {
       .toArray();
     console.log(posts);
 
-    return res.json({
-      message: JSON.parse(JSON.stringify(posts)),
-      success: true
-    });
+    if (posts.length < 1) {
+      return res.json({
+        message: "No Code",
+        success: true
+      });
+    } else {
+      return res.json({
+        message: JSON.parse(JSON.stringify(posts)),
+        success: true
+      });
+    }
   } catch (error) {
     return res.json({
       message: new Error(error).message,
