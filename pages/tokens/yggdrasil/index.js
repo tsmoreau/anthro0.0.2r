@@ -105,7 +105,7 @@ function YggClaim() {
     // get the posts
     let response = await fetch("/api/yggGetEmailFromCode", {
       method: "PUT",
-      body: obj
+      body: JSON.stringify({ content, account })
     });
 
     // get the data

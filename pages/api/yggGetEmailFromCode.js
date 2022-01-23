@@ -1,4 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+
+// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import moment from "moment";
+
+let date = moment(Date.now()).format("LLLL");
+
 const { connectToDatabase } = require("../../lib/mongodb");
 const ObjectId = require("mongodb").ObjectId;
 
@@ -99,21 +105,26 @@ async function redeemCode(req, res) {
   try {
     let { db } = await connectToDatabase();
 
+    let { content, account } = JSON.parse(req.body);
+
+    console.log("posts1");
+    console.log(content[0]._id);
+
     await db.collection("yggcodes").updateOne(
       {
-        _id: new ObjectId(req.body)
+        _id: new ObjectId(content[0]._id)
       },
-      { $set: { redeemed: true } }
+      { $set: { redeemed: true, redeemedBy: account, redeemedAt: date } }
     );
 
     let posts = await db
       .collection("yggcodes")
-      .find({ _id: req.body })
+      .find({ _id: content[0]._id })
       .toArray();
-    console.log("posts");
+    console.log("posts2");
 
     return res.json({
-      message: req.body,
+      message: posts,
       success: true
     });
   } catch (error) {
