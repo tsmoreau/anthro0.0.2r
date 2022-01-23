@@ -24,7 +24,7 @@ export default function AddPost() {
     setError("");
     setMessage("");
 
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < emails.length; i++) {
       console.log("Uploading Backer Info", { i });
 
       // post structure
