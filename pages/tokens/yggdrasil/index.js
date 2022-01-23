@@ -8,9 +8,26 @@ import Alert from "../../../components/Layout/Alert";
 import Footer from "../../../components/Layout/Footer";
 import useEagerConnect from "../../../hooks/useEagerConnect";
 import { Fragment, useState, useEffect } from "react";
+import ScrollToTop from "react-scroll-to-top";
 
 import React from "react";
 import PropTypes from "prop-types";
+
+function BackToTop() {
+  return (
+    <div className="flex mx-auto h-6 w-6">
+      <svg
+        width="24"
+        height="24"
+        xmlns="http://www.w3.org/2000/svg"
+        className="fill-th-accent-light stroke-th-accent-light"
+        stroke-width="1px"
+      >
+        <path d="M23.245 20l-11.245-14.374-11.219 14.374-.781-.619 12-15.381 12 15.391-.755.609z" />
+      </svg>
+    </div>
+  );
+}
 
 function YggClaim() {
   const [code, setCode] = useState("");
@@ -20,6 +37,7 @@ function YggClaim() {
   const [message, setMessage] = useState("");
   const [email, setEmail] = useState(0);
   const [obj, setObj] = useState(0);
+  const [noCode, setNoCode] = useState("Code");
   const [redeemed, setRedeemed] = useState(true);
   const { account, library } = useWeb3React();
   const [formInput, updateFormInput] = useState({
@@ -43,21 +61,28 @@ function YggClaim() {
 
     // get the data
     let data = await response.json();
-    console.log("Test");
-    console.log(data.message[0]._id);
-    console.log(data.message);
-    console.log("TES2");
-    console.log({ email: data.message[0].email, code: code });
+    if (data.status !== "success") {
+      setNoCode("No Code");
+    }else {
 
-    updateFormInput({ email: data.message[0].email, code: code });
-
-    if (data.success) {
-      // reset the fields and log the data
+      console.log(data.status);
+      console.log("Test");
+      console.log(data.message[0]._id);
+      console.log(data.message);
+      console.log("TES2");
+      console.log({ email: data.message[0].email, code: code });
+  
+      updateFormInput({ email: data.message[0].email, code: code });
 
       setContentFromDb(data.message);
       setObj(data.message[0]._id);
       setRedeemed(data.message[0].redeemed);
       setEmail(data.message[0].email);
+  
+    }
+    if (data.success) {
+      // reset the fields and log the data
+
     } else {
       // set the error
       return setError(data.message);
@@ -141,7 +166,7 @@ function YggClaim() {
       ) : (
         <div className="flex flex-col fixed top-0 left-0 right-0 w-screen h-screen bg-black/[.6] px-1 py-0.5 text-center justify-center items-center">
           <div className="text-white text-4xl animate-[pulse_2s_ease-in-out_infinite]">
-            Loading, Please Wait A Moment...
+            TX Sent, Please Wait While It Is Mined...
           </div>
         </div>
       )}
@@ -176,7 +201,9 @@ function YggClaim() {
             Check Code
           </button>
         </div>
+        {noCode}
       </div>
+
       {/* // DIVIDER BETWEEN COMPONENTS // */}
       <div className="font-futura w-full flex flex-row flex-1 mx-auto justify-center text-center">
         <div className="text-center  px-5 py-2  rounded-lg mx-5">
@@ -399,47 +426,97 @@ export default function Home() {
         <title>Anthromancer - Yggdrasil</title>
         <link rel="icon" href="/favicon.png" />
       </Head>
+
       <Nav />
       <div className=" bg-th-background text-th-primary-dark">
-        <div className="w-screen flex">
+        <div className="w-screen flex ">
           <div
             id="scroller"
             className="snap-y w-full lg:w-8/12 h-screen lg:h-156 overflow-scroll"
           >
-            <div className="lg:hidden -translate-y-4 flex snap-center  bg-th-background w-full  h-screen lg:h-156  flex-col text-center items-center justify-center text-base px-3 ">
-              <div className="w-8/12 flex mx-auto rounded-lg -translate-y-6">
-                <img id="NFT" src="/yggdrasil.png" />
+            <div className="">
+              <div className="flex mx-auto scale-30 bg-white opacity-90">
+                <ScrollToTop smooth component={<BackToTop />} />
               </div>
-              <p className="underline underline-offset-2 decoration-th-accent-light font-futura text-3xl font-bold -translate-y-5">
+            </div>
+            <div className="lg:hidden -translate-y-10 flex snap-center bg-th-background w-full  h-screen lg:h-156  flex-col text-center items-center justify-center text-base px-3 ">
+              <p className="font-futura text-3xl leading-tight lg:leading-relaxed font-semibold text-left underline underline-offset-2 decoration-th-accent-light">
                 ∞. Yggdrasil
               </p>
-              <p className="font-futura px-2 pt-3 text-sm -translate-y-5">
-                <p>
-                  In Norse mythology, Yggdrasil is the massive tree whose roots
-                  and branches stretch through the nine realms of time and
-                  space. The concept of a great tree on whose body rests the
-                  world, though, transcends any culture, and the
-                  four-dimensional structure of spacetime evokes a similar
-                  metaphor.
+              <div className="w-8/12 flex mx-auto rounded-lg mt-4 justify-center">
+                <video
+                  width="320"
+                  height="240"
+                  autoPlay
+                  muted
+                  className="rounded-lg flex mx-auto"
+                >
+                  <source
+                    src="https://gateway.ipfs.io/ipfs/QmVwJGSZmsBzsseFEx3RtCnGL8q5d1DXZQxUkDt7aCjEpd"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+
+              <p className=" font-futura px-12 pt-1 text-sm justify-center text-center flex flex-col items-center">
+                {!account ? (
+                  <div>
+                    <p className="font-futura px-12 pt-1 text-xl justify-center text-center flex flex-col items-center">
+                      To Claim:
+                    </p>
+                    <a href="https://www.one37pm.com/nft/tech/how-to-set-up-metamask-wallet">
+                      <div className="w-96 lg:w-72 mb-2 font-futura text-xl text-white px-5 py-0.5 pt-0.5 font-light border-2 bg-th-primary-medium border-th-accent-light hover:bg-th-primary-medium">
+                        1) Setup Your Metamask Wallet
+                      </div>
+                    </a>
+                  </div>
+                ) : (
+                  <div className="text-center text-base w-full mt-6">
+                    Your Wallet Address: <br />
+                    {account}
+                    <p className="font-futura w-full pt-1 text-sm justify-center text-center flex flex-col items-center">
+                      (This is the address where your Yggdrasil Token will be
+                      sent.)
+                    </p>
+                  </div>
+                )}
+
+                {!account ? (
+                  <div className="w-96 lg:w-72 font-futura text-xl text-white px-5 py-0.5 pt-0.5 font-light border-2 bg-th-primary-medium border-th-accent-light hover:bg-th-primary-medium">
+                    2) Connect Your Wallet Above
+                  </div>
+                ) : (
+                  <div>
+                    <YggClaim />
+                  </div>
+                )}
+              </p>
+              <div className="mt-6">
+                <p className="font-futura text-lg font-bold">
+                  More info below...
                 </p>
 
-                <p className="mt-4">
-                  We are the fruit of the tree of time, and as we are born we
-                  become its stewards. In this token we see the image of a tree
-                  appearing in front of metatron’s cube, a sacred geometric
-                  design which contains schematic information for all of the
-                  platonic solids, those mathematically perfect shapes that were
-                  once theorized to be the building blocks of reality. Yggdrasil
-                  is the icon of cosmic unity; the blend between the divine
-                  feminine chaos of nature, and the divine masculine order of
-                  math.
-                </p>
-              </p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  className="flex mx-auto mt-4  animate-pulse animate-animated animate-infinite"
+                  stroke="#67e8f9"
+                  strokeWidth="3px"
+                  fill="none"
+                >
+                  <path d="M12 21l-12-18h24z" />
+                </svg>
+              </div>
             </div>
             <div className="font-futura snap-center  bg-th-background w-full h-screen lg:h-156 flex flex-col text-center items-center justify-center text-base px-3 lg:px-36">
-              <div className="-mt-16 w-full ">
-                <p className="text-3xl leading-tight lg:leading-relaxed font-semibold text-left underline underline-offset-2 decoration-th-accent-light">
-                  The Beginning
+              <div className="-mt-16 w-full font-futura leading-tight">
+                <p className="hidden lg:flex font-futura text-5xl leading-tight lg:leading-relaxed font-semibold text-left underline underline-offset-2 decoration-th-accent-light">
+                  ∞. Yggdrasil
+                </p>
+                <p className="lg:hidden font-futura text-3xl leading-tight lg:leading-relaxed font-semibold text-left underline underline-offset-2 decoration-th-accent-light">
+                  The Beginning...
                 </p>
 
                 <p className="pt-6">
@@ -455,7 +532,7 @@ export default function Home() {
                     "The time from which ALL times begin..."
                   </span>
                 </p>
-                <p className="pt-6 ">
+                <p className="pt-6 leading-2">
                   As a token of our gratitude for their support, every verified
                   backer of the 2020 Anthromancer Kickstarter Campaign is
                   eligible to claim a single limited edition “Yggdrasil” NFT,
@@ -478,7 +555,7 @@ export default function Home() {
                   width="14"
                   height="14"
                   viewBox="0 0 24 24"
-                  className="flex mx-auto mt-4  "
+                  className="flex mx-auto mt-4  animate-pulse animate-animated animate-infinite"
                   stroke="#67e8f9"
                   strokeWidth="3px"
                   fill="none"
@@ -487,7 +564,7 @@ export default function Home() {
                 </svg>
               </div>
             </div>
-            <div className="snap-center bg-th-background w-full  h-screen lg:h-156 flex flex-col text-center items-center justify-center text-base px-3 lg:px-36">
+            <div className="font-futura snap-center bg-th-background w-full  h-screen lg:h-156 flex flex-col text-center items-center justify-center text-base px-3 lg:px-36">
               <div className="-mt-24 w-full">
                 <p className=" text-3xl font-bold text-left underline underline-offset-2 decoration-th-accent-light">
                   How to Get Started
@@ -514,8 +591,8 @@ export default function Home() {
                 </svg>
               </div>
             </div>
-            <div className=" snap-center bg-th-background w-full h-screen lg:h-156 flex flex-col text-center items-center justify-center text-base px-3 lg:px-36">
-              <div className="-mt-12 w-full leading-tight lg:leading-relaxed">
+            <div className="font-futura leading-tight snap-center bg-th-background w-full h-screen lg:h-156 flex flex-col text-center items-center justify-center text-base px-3 lg:px-36">
+              <div className="-mt-12 w-full  leading-tight">
                 <p className="text-3xl font-bold text-left underline underline-offset-2 decoration-th-accent-light">
                   The Steps
                 </p>
@@ -523,42 +600,44 @@ export default function Home() {
                 <p className="pt-6 text-xl font-bold text-left left-0">
                   1) Setup Your Metamask
                 </p>
-                <p className="-px-1 lg:px-6 pt-3 text-base leading-tight lg:leading-relaxed">
+                <p className="px-1 lg:px-6 pt-1 leading-2 ">
                   Download and install the Metamask browser extension. You can
-                  do so by navigating to the Metamask website and following the
-                  instructions from this ONE37pm article here. After you set up
-                  your Metamask Wallet and open the extension, you will be
-                  prompted to choose a password and to write down a list of
-                  words called a 'seed phrase'. Write these words down on a
-                  piece of paper and store it somewhere safe and secure. Don't
-                  store your seed phrase in a file on your computer, because if
-                  someone can hack your computer, they could find this file and
-                  use it to steal the contents of your wallet.
+                  do so by visiting the Metamask website or following a tutorial
+                  like the one from this ONE37pm article here.
+                </p>
+                <p className="px-1 lg:px-6 pt-3 leading-2 text-center font-semibold">
+                  **IMPORTANT** When MetaMask reveals your secret words, DO NOT
+                  forget to write them down! This section is bolded so that you
+                  don't accidentally skim and lose access to your wallet
+                  forever. DO NOT store your secret words online, as that can be
+                  a potential security risk. Instead, write them in a notebook
+                  or something secure you will not misplace.
                 </p>
                 <p className="pt-6 text-xl font-bold text-left left-0">
                   2) Connect to this Site
                 </p>
-                <p className="-px-1 lg:px-6 pt-3">
+                <p className="px-1 lg:px-6 pt-1">
                   When you wallet is set up, connect it to our website using the
-                  'Connect Wallet' button (top right).
+                  'Connect Wallet' button (top right). The address that appears
+                  in the top right is yours, and is where your token will be
+                  sent.
                 </p>
                 <p className="pt-6 text-xl font-bold text-left left-0">
                   3) Claim your NFT
                 </p>
-                <p className="-px-1 lg:px-6 pt-3">
-                  Click 'Claim Your NFT', and sign the transaction using your
-                  metamask wallet. The token will be automatically transferred
-                  into your account. It may take up to 10 minutes for this
-                  transaction to be fully confirmed; if you don't see it
-                  immediately, wait for a few minutes. Once the token has
-                  transferred, you ought to be able to look at your account on
-                  Opensea.io or Etherscan.io and see the token on display. If
-                  you have any technical difficulties with this process, reach
-                  out to us and we'll see if we can help.
+                <p className="px-1 lg:px-6 pt-1 leading-2">
+                  Enter the Claim Code received in your Kickstarter update email
+                  into the input box and click "Check Code". You will be
+                  prompted with the email address associated with your code, and
+                  asked to click "Redeem Code" to finalize the transaction. You
+                  will be presented with a "Transaction Sent, Please Wait"
+                  screen, and should wait the transaction is confirmed before
+                  navigating away. When the transaction is confirmed you will
+                  then be presented with a link to your new token!
                 </p>
               </div>
               <div className="mt-8">
-                <p className=" text-lg font-bold">The Claim Button...</p>
+                <p className=" text-lg font-bold">Now What...</p>
 
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -574,43 +653,13 @@ export default function Home() {
                 </svg>
               </div>
             </div>
-            <div className=" snap-center bg-th-background w-full h-screen lg:h-156 flex flex-col text-center items-center justify-center text-base px-3 lg:px-36">
-              <div className="-mt-12 w-full flex flex-col mx-auto text-center justify-center">
-                <p className="text-3xl font-bold text-left underline underline-offset-2 decoration-th-accent-light">
-                  The Claim Button
-                </p>
-                <p className="flex mx-auto text-center justify-center py-4">
-                  Please Enter your Claim Code from Email below.
-                </p>
-                <input type="text" className="" />
-                <div className="mt-4 mx-auto bg-yggpurple-300 w-48 justify-center text-center px-4 py-1.5 border rounded-lg">
-                  Redeem Code
-                </div>
-              </div>
-              <div className="mt-8">
-                <p className=" text-lg font-bold">Now What?!</p>
-
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  className="flex mx-auto mt-4  "
-                  stroke="#67e8f9"
-                  strokeWidth="3px"
-                  fill="none"
-                >
-                  <path d="M12 21l-12-18h24z" />
-                </svg>
-              </div>
-            </div>
-            <div className=" snap-center bg-th-background w-full h-screen lg:h-156 flex flex-col text-center items-center justify-center text-base px-3 lg:px-36">
-              <div className="-mt-12 w-full ">
+            <div className="font-futura snap-center bg-th-background w-full h-screen lg:h-156 flex flex-col text-center items-center justify-center text-base px-3 lg:px-36">
+              <div className="-mt-12 w-full leading-tight">
                 <p className="text-3xl font-bold text-left underline underline-offset-2 decoration-th-accent-light">
                   Congratulations! Now What?
                 </p>
 
-                <p className="pt-6 leading-tight lg:leading-relaxed">
+                <p className="-px-1 lg:px-6 pt-8 leading-2">
                   Now that you hold an Anthromancer NFT, you will be eligible to
                   receive discounts on future Anthromancer NFT drops, early
                   access to beta testing for chain-based games and apps we
@@ -619,18 +668,16 @@ export default function Home() {
                   you have to do is protect your wallet and seed phrase, and
                   keep the token safe within it.
                 </p>
-                <p className="pt-6 leading-tight lg:leading-relaxed">
+                <p className="-px-1 lg:px-6 pt-3 leading-2">
                   You are also free to sell your token on a marketplace such as
                   Opensea.io, to trade it for other tokens via a service such as
                   sudoswap, to display it in a virtual gallery such as
-                  OnCyber.io to build applications that use it and increase its
-                  perceived utility, or to hold it and forget you even have it
-                  until it becomes useful to you down the road. We intend to
-                  develop all of our future games and applications so that
-                  holders of these early tokens are given special consideration
-                  and novel powers in Anthromancer experiences. If you believe
-                  in us, we will find ways to reward you for that belief. This
-                  token is our opportunity to deliver value to those who
+                  OnCyber.io to build applications that use it, or to hold it
+                  and forget you even have it until it becomes useful to you. We
+                  intend to develop all of our future games and experiences so
+                  that holders of these early tokens are given special
+                  consideration and novel powers in Anthromancer experiences.
+                  This token is our opportunity to deliver value to those who
                   believed in us from the outset, and we find great joy in
                   knowing we can express our gratitude to you, forever, thanks
                   to the mechanism of tokenized assets. Thank you for playing
@@ -656,13 +703,13 @@ export default function Home() {
                 </svg>
               </div>
             </div>
-            <div className="snap-center bg-th-background w-full h-screen lg:h-156 flex flex-col text-center items-center justify-center text-base px-3 lg:px-36">
+            <div className="leading-tight font-futura snap-center bg-th-background w-full h-screen lg:h-156 flex flex-col text-center items-center justify-center text-base px-3 lg:px-36">
               <div className="-mt-8 w-full ">
                 <p className="text-3xl font-bold text-left underline underline-offset-2 decoration-th-accent-light">
                   What's Next for Anthromancer?
                 </p>
 
-                <p className="pt-6 leading-relaxed">
+                <p className="pt-6 leading-2">
                   In the following months and years Anthromancer will release a
                   series of NFT projects which will connect a strong community
                   of friends, fans, gamers and builders. By incentivizing the
@@ -673,7 +720,7 @@ export default function Home() {
                   you'’'d like to know more about our mid- and long-term vision,
                   we invite you to take a look at our Road Map.
                 </p>
-                <p className="italic mt-4 ">
+                <p className="italic mt-8 ">
                   This is Anthromancer. We are pleased to Welcome You to The
                   Enlightenment Machine.
                 </p>
@@ -700,7 +747,18 @@ export default function Home() {
           </div>
           <div className=" hidden lg:flex flex-col lg:w-4/12 text-center mx-auto">
             <div className="w-8/12 flex mx-auto rounded-lg mt-4">
-              <img id="NFT" src="/yggdrasil.png" />
+              <video
+                width="320"
+                height="240"
+                autoPlay
+                muted
+                className="rounded-lg"
+              >
+                <source
+                  src="https://gateway.ipfs.io/ipfs/QmVwJGSZmsBzsseFEx3RtCnGL8q5d1DXZQxUkDt7aCjEpd"
+                  type="video/mp4"
+                />
+              </video>
             </div>
             <p className="hidden text-3xl font-bold">∞. Yggdrasil</p>
 
@@ -739,10 +797,24 @@ export default function Home() {
             </p>
           </div>
         </div>
+      </div>
+      <div className="hidden lg:flex mx-auto">
         <Footer />
       </div>
 
       <style jsx>{`
+        #title {
+          font-family: Futura;
+        }
+
+        @font-face {
+          font-family: Futura;
+          src: url(/fonts/futura-pt-book.otf);
+        }
+        @font-face {
+          font-family: Anthro;
+          src: url(/fonts/AnthromancerRegular2.otf);
+        }
         nav {
           display: flex;
           justify-content: space-between;

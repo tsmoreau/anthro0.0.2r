@@ -10,6 +10,12 @@
     font-weight: 400;
     src: url(/fonts/AnthromancerRegular2.otf) format("otf");
   }
+
+  @font-face {
+    font-family: Futura;
+    font-weight: 400;
+    src: url(/fonts/futura-pt-book.otf) format("otf");
+  }
 }
 
 :root {

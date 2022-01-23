@@ -47,7 +47,7 @@ export default function Home() {
       <main className="flex flex-col mx-auto lg:w-2/3 w-11/12 bg-th-background font-futura mb-10 text-center justify-center">
         {/* Shop Title Section */}
         <div id="shop" className="py-8 ">
-          <p className=" font-anthro text-th-primary-dark mt-16 decoration-th-accent-light underline font-futura font-medium text-7xl ">
+          <p className=" font-anthro text-th-primary-dark mt-16 decoration-th-accent-light underline  font-medium text-7xl ">
             SHOP
           </p>
         </div>
@@ -87,7 +87,7 @@ export default function Home() {
           className="bg-th-background w-fullmt-2 lg:mt-36 font-futura text-center justify-center"
         >
           <div className="py-8">
-            <p className=" font-anthro text-th-primary-dark mt-16 decoration-th-accent-light underline font-futura font-medium text-7xl ">
+            <p className=" font-anthro text-th-primary-dark mt-16 decoration-th-accent-light underline font-medium text-7xl ">
               TOKENS
             </p>
           </div>

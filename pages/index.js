@@ -12,57 +12,22 @@ import ETHBalance from "../components/Utils/ETHBalance";
 import useEagerConnect from "../hooks/useEagerConnect";
 import usePersonalSign, { hexlify } from "../hooks/usePersonalSign";
 import ScrollAnimation from "react-animate-on-scroll";
+import ScrollToTop from "react-scroll-to-top";
 
 const contractAddress2 = 0x4a139bb672adc671d84dd194a5d9f8ad8d7d7167;
 
-function YggClaim() {
-  const { account, library } = useWeb3React();
-  const [formInput, updateFormInput] = useState({
-    email: "",
-    code: ""
-  });
-
-  async function callRelayer() {
-    if (!formInput.email || !formInput.code) {
-      console.log("error");
-    } else {
-      console.log("Wallet Address");
-      console.log(account);
-      console.log("Email");
-      console.log(formInput.email);
-      console.log("Code");
-      console.log(formInput.code);
-      let response = await fetch("/api/yggDefenderConnect", {
-        method: "POST",
-        body: JSON.stringify({ account, formInput }),
-        headers: { "Content-Type": "application/json" }
-      });
-      console.log(response);
-    }
-  }
-
+function BackToTop() {
   return (
-    <div className="font-futura text-white text-xl flex flex-col items-center justify-center mx-auto  w-3/4">
-      <input
-        placeholder="Email Address Used in Anthromancer Kickstarter"
-        className="w-full mt-2 border rounded-lg p-4 text-th-priamry-dark bg-th-background"
-        onChange={(e) =>
-          updateFormInput({ ...formInput, email: e.target.value })
-        }
-      />
-      <input
-        placeholder="Claim Code From Email"
-        className="w-full mt-2 border rounded-lg p-4 text-th-priamry-dark bg-th-background"
-        onChange={(e) =>
-          updateFormInput({ ...formInput, code: e.target.value })
-        }
-      />
-      <button
-        className="w-48 text-th-primary-dark text-xl border rounded-lg px-2 py-0.5 mt-2"
-        onClick={callRelayer}
+    <div className="flex mx-auto h-6 w-6">
+      <svg
+        width="24"
+        height="24"
+        xmlns="http://www.w3.org/2000/svg"
+        className="fill-th-accent-light stroke-th-accent-light"
+        stroke-width="1px"
       >
-        Redeem Code
-      </button>
+        <path d="M23.245 20l-11.245-14.374-11.219 14.374-.781-.619 12-15.381 12 15.391-.755.609z" />
+      </svg>
     </div>
   );
 }
@@ -93,6 +58,11 @@ export default function Home() {
           href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
         />
       </Head>
+      <div className="">
+        <div className="flex mx-auto scale-30 bg-white opacity-90">
+          <ScrollToTop smooth component={<BackToTop />} />
+        </div>
+      </div>
       <div className="absolute top-0 z-50 w-full">
         <Nav />
       </div>
@@ -138,10 +108,17 @@ export default function Home() {
       <Footer />
 
       <style jsx>{`
-        nav {
+        #title {
+          font-family: Futura;
         }
 
-        main {
+        @font-face {
+          font-family: Futura;
+          src: url(/fonts/futura-pt-book.otf);
+        }
+        @font-face {
+          font-family: Anthro;
+          src: url(/fonts/AnthromancerRegular2.otf);
         }
       `}</style>
 

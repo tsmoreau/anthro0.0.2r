@@ -64,7 +64,7 @@ module.exports = withAnimations({
       },
       fontFamily: {
         anthro: ["Anthro"],
-        futura: ["Futura PT"]
+        futura: ["Futura"]
       }
     }
   },
